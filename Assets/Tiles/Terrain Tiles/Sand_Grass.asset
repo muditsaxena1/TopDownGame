@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e4e4fc705376343a3e65b25d94f0e2, type: 3}
+  m_Name: Sand_Grass
+  m_EditorClassIdentifier: 
+  m_Sprites:
+  - {fileID: -5574818101562837895, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: -3494873410110425860, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 4316391573790967367, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 8293914090560234969, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 8529009561778430900, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 2052081400870779106, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 7234048546755516639, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: -622444505725289627, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 1325620063009663472, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 8593392145666630804, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 9022382142138574306, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 184171544521943238, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: -6495606374800360611, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: 322087557014441920, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
+  - {fileID: -1119607341714655377, guid: aacd62caf35b19247bca9365d5aa95e3, type: 3}
