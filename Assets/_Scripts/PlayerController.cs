@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 4f;
     private Rigidbody2D myRigidbody;
-    private Animator animator;
+    private Animation anim;
+    private AnimationClip[] clips;
 
     void Start()
     {
         myRigidbody = this.GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animation>();
+        clips = AnimationUtility.GetAnimationClips(this.gameObject);
     }
 
 
@@ -50,37 +53,13 @@ public class PlayerController : MonoBehaviour
     void MovePlayer(Vector2 direction)
     {
         Vector2 currPos = new Vector2(transform.position.x, transform.position.y);
-        switch (direction.y * 3 + direction.x)
-        {
-            case -4f:
-                //DownLeft
-                break;
-            case -3f:
-                //Down
-                break;
-            case -2f:
-                //DownRight
-                break;
-            case -1f:
-                //Left
-                break;
-            case 4f:
-                //UpRight
-                break;
-            case 3f:
-                //Up
-                break;
-            case 2f:
-                //UpLeft
-                break;
-            case 1f:
-                //Right
-                break;
-            default:
-                Debug.LogWarning("This should have never happended");
-                break;
-        }
+        int animNumber = (int)(direction.y * 3 + direction.x);
         direction = direction * speed * Time.deltaTime;
         myRigidbody.MovePosition(currPos + direction);
+        if (anim.isPlaying)
+        {
+            return;
+        }
+        anim.Play("CharacterDown");
     }
 }
