@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         float xInpt = StepFunction(Input.GetAxisRaw("Horizontal"));
         float yInpt = StepFunction(Input.GetAxisRaw("Vertical"));
+        
         if (isAttacking)
         {
             Debug.Log("Attack");
