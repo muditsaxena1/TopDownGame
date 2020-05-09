@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Animator anim;
     private float oneBySquareRoot = 0.7072f;
+    private bool isAttacking = false;
+    public float attackRate = 1f;      //n times per second
+    private float nextAttackTime = 0f;
 
     void Start()
     {
@@ -16,6 +19,17 @@ public class PlayerController : MonoBehaviour
         anim = this.GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isAttacking && Time.time > nextAttackTime)
+            {
+                isAttacking = true;
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+    }
 
     void FixedUpdate()
     {
@@ -26,8 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         float xInpt = StepFunction(Input.GetAxisRaw("Horizontal"));
         float yInpt = StepFunction(Input.GetAxisRaw("Vertical"));
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+        if (isAttacking)
         {
+            Debug.Log("Attack");
+            isAttacking = false;
             Attack();
         }
         MovePlayer(new Vector2(xInpt, yInpt));
