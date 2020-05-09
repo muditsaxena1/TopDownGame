@@ -40,15 +40,20 @@ public class VillagerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moveNpc();
+    }
+
+    public void moveNpc()
+    {
         if (isWalking)
         {
             walkCounter -= Time.deltaTime;
 
             switch (walkDirection)
             {
-                case 0: 
-                    myRigidBody.velocity=new Vector2(0,moveSpeed);
-                    if (hasWalkZone && transform.position.y>maxWalkPoint.y)
+                case 0:
+                    myRigidBody.velocity = new Vector2(0, moveSpeed);
+                    if (hasWalkZone && transform.position.y > maxWalkPoint.y)
                     {
                         isWalking = false;
                         waitCounter = waitTime;
@@ -56,7 +61,7 @@ public class VillagerController : MonoBehaviour
                     anim.SetFloat("MoveY", 1);
                     break;
                 case 1:
-                    myRigidBody.velocity = new Vector2( moveSpeed,0);
+                    myRigidBody.velocity = new Vector2(moveSpeed, 0);
                     if (hasWalkZone && transform.position.x > maxWalkPoint.x)
                     {
                         isWalking = false;
@@ -74,7 +79,7 @@ public class VillagerController : MonoBehaviour
                     anim.SetFloat("MoveY", -1);
                     break;
                 case 3:
-                    myRigidBody.velocity = new Vector2(- moveSpeed,0);
+                    myRigidBody.velocity = new Vector2(-moveSpeed, 0);
                     if (hasWalkZone && transform.position.x < minWalkPoint.x)
                     {
                         isWalking = false;
@@ -86,7 +91,7 @@ public class VillagerController : MonoBehaviour
 
             }
 
-            if (walkCounter<0)
+            if (walkCounter < 0)
             {
                 isWalking = false;
                 waitCounter = waitTime;
@@ -99,7 +104,7 @@ public class VillagerController : MonoBehaviour
             anim.SetFloat("MoveX", 0);
             anim.SetFloat("MoveY", 0);
 
-            if (waitCounter<0)
+            if (waitCounter < 0)
             {
                 ChooseDirection();
 
