@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Animator anim;
     private float oneBySquareRoot = 0.7072f;
+    private bool isAttacking = false;
+    public float attackRate = 1f;      //n times per second
+    private float nextAttackTime = 0f;
 
     void Start()
     {
@@ -16,6 +19,17 @@ public class PlayerController : MonoBehaviour
         anim = this.GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isAttacking && Time.time > nextAttackTime)
+            {
+                isAttacking = true;
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+    }
 
     void FixedUpdate()
     {
@@ -26,8 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         float xInpt = StepFunction(Input.GetAxisRaw("Horizontal"));
         float yInpt = StepFunction(Input.GetAxisRaw("Vertical"));
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (isAttacking)
         {
+            Debug.Log("Attack");
+            isAttacking = false;
             Attack();
         }
         MovePlayer(new Vector2(xInpt, yInpt));
@@ -35,11 +52,11 @@ public class PlayerController : MonoBehaviour
 
     float StepFunction(float val)
     {
-        if(val >= 0.5f)
+        if (val >= 0.5f)
         {
             return 1f;
         }
-        if(val <= -0.5f)
+        if (val <= -0.5f)
         {
             return -1f;
         }
@@ -58,7 +75,7 @@ public class PlayerController : MonoBehaviour
     void MovePlayer(Vector2 direction)
     {
         //Animation
-        if(direction.x == 0 && direction.y == 0)
+        if (direction.x == 0 && direction.y == 0)
         {
             anim.SetBool("KeyDown", false);
         }
@@ -67,7 +84,7 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("LastPos", 0);
             anim.SetBool("KeyDown", true);
         }
-        else if(direction.x == -1 && direction.y == -1)
+        else if (direction.x == -1 && direction.y == -1)
         {
             anim.SetInteger("LastPos", 1);
             anim.SetBool("KeyDown", true);
@@ -77,7 +94,7 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("LastPos", 2);
             anim.SetBool("KeyDown", true);
         }
-        else if(direction.x == -1 && direction.y == 1)
+        else if (direction.x == -1 && direction.y == 1)
         {
             anim.SetInteger("LastPos", 3);
             anim.SetBool("KeyDown", true);
@@ -87,7 +104,7 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("LastPos", 4);
             anim.SetBool("KeyDown", true);
         }
-        else if(direction.x == 1 && direction.y == 1)
+        else if (direction.x == 1 && direction.y == 1)
         {
             anim.SetInteger("LastPos", 5);
             anim.SetBool("KeyDown", true);
@@ -107,9 +124,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("direction.x/y should have values among -1,0,1. Found to be " + direction.x + "/" + direction.y);
         }
-            
+
         Vector2 currPos = new Vector2(transform.position.x, transform.position.y);
-        if(Mathf.Abs(direction.x) == 1f && Mathf.Abs(direction.y) == 1f)
+        if (Mathf.Abs(direction.x) == 1f && Mathf.Abs(direction.y) == 1f)
         {
             direction = direction * oneBySquareRoot;
         }
