@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float attackRate = 1f;      //n times per second
     private float nextAttackTime = 0f;
     public float atkDamage = 40f;
+    public Joystick joystick;
 
     Vector2 attackPoint;
 
@@ -29,23 +30,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isAttacking && Time.time > nextAttackTime)
-            {
-                isAttacking = true;
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+            TryAttacking();
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         GetInput();
     }
 
     void GetInput()
     {
-        float xInpt = StepFunction(Input.GetAxisRaw("Horizontal"));
-        float yInpt = StepFunction(Input.GetAxisRaw("Vertical"));
+        //float xInpt = StepFunction(Input.GetAxisRaw("Horizontal"));
+        //float yInpt = StepFunction(Input.GetAxisRaw("Vertical"));
+
+        float xInpt = StepFunction(joystick.Horizontal);
+        float yInpt = StepFunction(joystick.Vertical);
 
         if (isAttacking)
         {
@@ -54,6 +54,16 @@ public class PlayerController : MonoBehaviour
             Attack();
         }
         MovePlayer(new Vector2(xInpt, yInpt));
+    }
+
+    public void TryAttacking()
+    {
+        Debug.Log("Inside TryAttacking()");
+        if (!isAttacking && Time.time > nextAttackTime)
+        {
+            isAttacking = true;
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
     }
 
     float StepFunction(float val)

@@ -39,9 +39,9 @@ public class HealthManager : MonoBehaviour
     void Die()
     {
         Debug.Log(this.name + " is dead");
-        //if(tag == "Player")
-        //{
-        //    SceneManager.LoadScene(0);
-        //}
+        if (tag == "Player")
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

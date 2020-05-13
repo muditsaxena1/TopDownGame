@@ -46,7 +46,7 @@ public class FireballJutsu : MonoBehaviour
         if(target.tag == "Player")
         {
             target.GetComponent<HealthManager>().TakeDamage(atkDamage);
-            Destroy(this.gameObject);
         }
+        Destroy(this.gameObject);
     }
 }
