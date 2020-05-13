@@ -350,6 +350,7 @@ MonoBehaviour:
   speed: 4
   attackRate: 1
   atkDamage: 40
+  joystick: {fileID: 0}
 --- !u!114 &5869141232254388251
 MonoBehaviour:
   m_ObjectHideFlags: 0

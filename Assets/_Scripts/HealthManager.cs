@@ -43,5 +43,17 @@ public class HealthManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+        else if(tag == "Enemy")
+        {
+            GetComponent<Animator>().SetBool("isDead", true);
+            GetComponent<EnemyWizardAI>().beingDestroyed = true;
+            StartCoroutine(DistroyEnemy());
+        }
+    }
+
+    IEnumerator DistroyEnemy()
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(gameObject);
     }
 }

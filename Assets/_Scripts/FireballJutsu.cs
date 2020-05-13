@@ -43,10 +43,13 @@ public class FireballJutsu : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D target)
     {
         Debug.Log("Collided with " + target.name);
-        if(target.tag == "Player")
+        if(target.tag == "Player" || target.tag == "Enemy")
         {
             target.GetComponent<HealthManager>().TakeDamage(atkDamage);
         }
-        Destroy(this.gameObject);
+        if(target.tag != "Ground Obstacles")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
