@@ -17,7 +17,7 @@ Well you're wasting my time! Got things to take care of.
         He ruled these lands of Asnaria before his Majesty Xorkon swept him away.
         -- ->Divert1
     **[Go back]->Divert1
-*[Leave]Sorry!I didn't mean to talk to you.
+*[Leave]Farewell.
 ->Endpart
 
 ==Endpart==

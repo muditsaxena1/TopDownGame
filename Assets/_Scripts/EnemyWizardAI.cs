@@ -9,6 +9,7 @@ public class EnemyWizardAI : MonoBehaviour
     Rigidbody2D myRigidbody;
     Vector3 target;
     Animator anim;
+    public bool beingDestroyed = false;
 
     [SerializeField]
     float roamingSpeed = 10f, followingSpeed = 12f;
@@ -49,6 +50,10 @@ public class EnemyWizardAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (beingDestroyed)
+        {
+            return;
+        }
         float separation = Vector3.Distance(playerTransform.position, transform.position);
         switch (currState)
         {
@@ -117,10 +122,13 @@ public class EnemyWizardAI : MonoBehaviour
     IEnumerator StartFireJutsu(Transform target)
     {
         yield return new WaitForSeconds(1f);
-        Vector3 startingPoint = transform.position + new Vector3((transform.localScale.x < 0?1:-1)*fireStartingPointShift.x, fireStartingPointShift.y, 0f);
-        GameObject fire = Instantiate(fireball, startingPoint, Quaternion.identity) as GameObject;
-        Vector3 dir = (target.position - startingPoint).normalized;
-        fire.GetComponent<FireballJutsu>().SetDirection(dir);
+        if (!beingDestroyed)
+        {
+            Vector3 startingPoint = transform.position + new Vector3((transform.localScale.x < 0 ? 1 : -1) * fireStartingPointShift.x, fireStartingPointShift.y, 0f);
+            GameObject fire = Instantiate(fireball, startingPoint, Quaternion.identity) as GameObject;
+            Vector3 dir = (target.position - startingPoint).normalized;
+            fire.GetComponent<FireballJutsu>().SetDirection(dir);
+        }
     }
 
     void MoveEnemy()

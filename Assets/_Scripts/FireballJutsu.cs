@@ -5,7 +5,8 @@ using UnityEngine;
 public class FireballJutsu : MonoBehaviour
 {
     [SerializeField]
-    float speed = 3f, damage = 30f;
+    float speed = 3f;
+    public float atkDamage = 30f;
 
     private bool started;
     Vector3 direction;
@@ -42,7 +43,11 @@ public class FireballJutsu : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D target)
     {
         Debug.Log("Collided with " + target.name);
-        if(target.tag == "Player")
+        if(target.tag == "Player" || target.tag == "Enemy")
+        {
+            target.GetComponent<HealthManager>().TakeDamage(atkDamage);
+        }
+        if(target.tag != "Ground Obstacles")
         {
             Destroy(this.gameObject);
         }
